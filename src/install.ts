@@ -32,8 +32,7 @@
  * @module install
  */
 import { $globalThis, ObjectDefineProperty } from "./_internal.ts";
-import { atob } from "./atob.ts";
-import { btoa } from "./btoa.ts";
+import { atob, btoa } from "../mod.ts";
 
 /**
  * Represents a successful operation.

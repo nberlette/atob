@@ -1,0 +1,27 @@
+{
+  "name": "@nick/atob",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "Nicholas Berlette",
+    "email": "nick@berlette.com",
+    "url": "https://github.com/nberlette/atob"
+  },
+  "exports": {
+    ".": "./mod.ts",
+    "./atob": "./src/atob.ts",
+    "./btoa": "./src/btoa.ts",
+    "./install": "./src/install.ts",
+    "./shim": "./src/shim.ts",
+    "./shim.d.ts": "./src/shim.d.ts"
+  },
+  "tasks": {
+    "test": "deno test -A --no-check=remote --parallel --doc --permit-no-files",
+    "fix": "deno fmt && deno lint --fix",
+    "ok": "deno fmt --check && deno lint && deno run test"
+  },
+  "publish": {
+    "include": ["./mod.ts", "README.md", "LICENSE", "deno.json", "./src/*.ts"],
+    "exclude": ["**/*.test.*", "**/*.bench.*", "**/.*"]
+  }
+}

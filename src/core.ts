@@ -1,13 +1,16 @@
 /**
- * This module provides a standalone ponyfill of the native `atob` function,
- * for decoding base64 strings into ASCII strings.
+ * This module provides a standalone ponyfill of the native `atob` and `btoa`
+ * functions, for encoding and decoding between base64 and ASCII strings.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/atob
- * @module atob
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa
+ * @module core
  */
 import {
   AZ,
   StringFromCharCode,
+  StringPrototypeCharAt,
+  StringPrototypeCharCodeAt,
   StringPrototypeIndexOf,
   StringPrototypeTrim,
   ThrowException,
@@ -53,5 +56,36 @@ export function atob(a: string): string {
     if (e4 !== 64) s += StringFromCharCode(c3);
   }
 
+  return s;
+}
+
+/**
+ * Encodes a string of ASCII characters into a base64 string.
+ *
+ * @param b The string to encode.
+ * @returns The base64 encoded string.
+ * @throws {DOMException} If the input string contains characters that are
+ * outside the valid range of ASCII characters.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa
+ */
+export function btoa(b: string): string {
+  b ??= "";
+  b += ""; // implicit string conversion
+
+  let s = "", i = 0;
+  while (i < b.length) {
+    const c1 = StringPrototypeCharCodeAt(b, i++) & 0xff;
+    s += StringPrototypeCharAt(AZ, c1 >> 2);
+    const c2 = StringPrototypeCharCodeAt(b, i++) & 0xff;
+    s += StringPrototypeCharAt(AZ, (c1 & 0x3) << 4 | (c2 >> 4));
+    if (i >= b.length) {
+      s += StringPrototypeCharAt(AZ, (c2 & 0x0f) << 2);
+      s += "=";
+      break;
+    }
+    const c3 = StringPrototypeCharCodeAt(b, i++) & 0xff;
+    s += StringPrototypeCharAt(AZ, (c2 & 0x0f) << 2 | (c3 >> 6));
+    s += StringPrototypeCharAt(AZ, c3 & 0x3f);
+  }
   return s;
 }

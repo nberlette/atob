@@ -70,7 +70,7 @@ jobs:
           github.event_name == 'workflow_dispatch' &&
           github.event.inputs.deno-test == 'true'
         name: deno test
-        run: deno test -A --no-check=remote --parallel
+        run: deno test -A --no-check=remote --parallel --permit-no-files
 
       - if: |
           github.event_name != 'workflow_dispatch' ||
@@ -83,8 +83,7 @@ jobs:
           github.event_name == 'workflow_dispatch' &&
           github.event.inputs.doc-lint == 'true'
         name: deno doc --lint
-        run: |
-          deno doc --lint mod.ts src/braces.ts src/balanced.ts src/expand.ts
+        run: deno doc --lint mod.ts src/install.ts
 
       # only need to run this once
       - if: |

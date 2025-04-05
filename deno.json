@@ -9,8 +9,6 @@
   },
   "exports": {
     ".": "./mod.ts",
-    "./atob": "./src/atob.ts",
-    "./btoa": "./src/btoa.ts",
     "./install": "./src/install.ts",
     "./shim": "./src/shim.ts",
     "./shim.d.ts": "./src/shim.d.ts"

@@ -15,7 +15,7 @@
  * ```
  * @module shim
  */
-import "./shim.d.ts";
+import type {} from "./shim.d.ts";
 import install from "./install.ts";
 
 install();

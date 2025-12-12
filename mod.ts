@@ -26,6 +26,14 @@ import {
  * @throws {DOMException} If the decoded string contains characters that are
  * outside the valid range of ASCII characters.
  * @see https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/atob
+ * @example
+ * ```ts
+ * import { atob } from "@nick/atob";
+ * import assert from "node:assert";
+ *
+ * const decoded = atob("aGVsbG8gd29ybGQ=");
+ * assert.strictEqual(decoded, "hello world");
+ * ```
  */
 export function atob(a: string): string {
   a = (a ?? "") + "";
@@ -67,6 +75,14 @@ export function atob(a: string): string {
  * @throws {DOMException} If the input string contains characters that are
  * outside the valid range of ASCII characters.
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa
+ * @example
+ * ```ts
+ * import { btoa } from "@nick/atob";
+ * import assert from "node:assert";
+ *
+ * const encoded = btoa("hello world");
+ * assert.strictEqual(encoded, "aGVsbG8gd29ybGQ=");
+ * ```
  */
 export function btoa(b: string): string {
   b ??= "";

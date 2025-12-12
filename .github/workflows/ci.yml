@@ -58,7 +58,7 @@ jobs:
         deno: [canary]
     steps:
       - name: setup repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: setup deno
         uses: denoland/setup-deno@v2
@@ -76,7 +76,7 @@ jobs:
           github.event_name != 'workflow_dispatch' ||
           github.event.inputs.doc-test == 'true'
         name: deno test --doc
-        run: deno test -A --no-check=remote --parallel --doc
+        run: deno task test
 
       - if: |
           runner.os == 'Linux' &&
@@ -115,4 +115,6 @@ jobs:
             )
           )
         name: publish to jsr
-        run: deno publish --dry-run && deno publish
+        run: |
+          deno publish --allow-dirty --dry-run
+          deno publish --allow-dirty
